@@ -8,12 +8,12 @@ const Team = require('../models/team');
 const Whs = require('../models/whs');
 
 const updateScore_controller = require("../controllers/updateScore");
-// const updateScore2_controller = require("../controllers/updateScore2");
 const updateWeekly_controller = require("../controllers/updateWeekly");
-// const updateScore3_controller = require("../controllers/updateScore3");
 const qdb_controller = require("../controllers/qdb");
 const createTeam_controller = require("../controllers/createTeam1");
 const updateRankings_controller = require("../controllers/updateRankings");
+const checker_controller = require("../controllers/checker");
+
 
 // yahoo oauth
 router.use('/auth', require('./auth'))
@@ -55,12 +55,12 @@ router.get('/coming', function (req, res, next) {
 
 router.get("/", function (req, res) {
 
-  var byLsTotalScore ;
+  var byLsTotalScore;
 
   // sort team total score high to low
   User.find({}, function (err, users) {
 
-return users
+    return users
 
 
   }).then(function (users) {
@@ -108,24 +108,24 @@ return users
 //   })
 // })
 
-router.get('/api/v1/whs/',function(req,res){
+router.get('/api/v1/whs/', function (req, res) {
   // sort team total score high to low
 
 
 
 })
 
-router.get('/api/v1/teams/:searchby&:key',function(req,res){
+router.get('/api/v1/teams/:searchby&:key', function (req, res) {
   var searchBy = req.params.searchby;
   var key = req.params.key;
   var qParam = {};
-  if(searchBy === 'all'){
+  if (searchBy === 'all') {
     qParam = {};
-  }else{
+  } else {
     qParam[searchBy] = key;
-    console.log(searchBy,' ',key);
+    console.log(searchBy, ' ', key);
   }
-  Team.find(qParam,function(err,teams){
+  Team.find(qParam, function (err, teams) {
     res.send(teams);
   })
 })
@@ -170,7 +170,6 @@ router.get('/test4', updateWeekly_controller.test);
 // get weekly high score add to whs db
 router.get('/qdb', qdb_controller.test);
 
-module.exports = router;
+router.get('/checker', checker_controller.test);
 
-// router.get('/test2', updateScore2_controller.test);
-// router.get('/test3', updateScore3_controller.test);
+module.exports = router;
