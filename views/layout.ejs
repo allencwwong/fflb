@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>FF Leaderboard</title>
+    <meta http-equiv="cleartype" content="on">
+    <meta name="MobileOptimized" content="320">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/slideout/index.css">
+    <link rel='stylesheet' href='/css/style.css' />
+    <!-- fontaweseom -->
+    <link rel='stylesheet' href='/css/fontawesome/css/all.min.css' />
+
+
+    <style>
+        @font-face {
+                    font-family: "YahooSansBold";
+                    src: url("Yahoo Sans-Bold.eot");
+                        src: url("https://s.yimg.com/cv/api/bcg/banners/fonts/Yahoo_Sans-Bold.eot?#iefix") format("embedded-opentype"),
+                             url("https://s.yimg.com/cv/api/bcg/banners/fonts/Yahoo_Sans-Bold.woff2") format("woff2"),
+                             url("https://s.yimg.com/cv/api/bcg/banners/fonts/Yahoo_Sans-Bold.woff") format("woff");
+                    font-weight: 700;
+                    font-style: normal;
+                    }
+
+                @font-face {
+                    font-family: "YahooSansExtraBold";
+                    src: url("Yahoo Sans-ExtraBold.eot");
+                        src: url("https://s.yimg.com/cv/api/bcg/banners/fonts/Yahoo_Sans-ExtraBold.eot?#iefix") format("embedded-opentype"),
+                             url("https://s.yimg.com/cv/api/bcg/banners/fonts/Yahoo_Sans-ExtraBold.woff2") format("woff2"),
+                             url("https://s.yimg.com/cv/api/bcg/banners/fonts/Yahoo_Sans-ExtraBold.woff") format("woff");
+                    font-weight: 800;
+                    font-style: normal;
+                    }
+
+                @font-face {
+                    font-family: "YahooSansBlack";
+                    src: url("Yahoo Sans-Black.eot");
+                        src: url("https://s.yimg.com/cv/api/bcg/banners/fonts/Yahoo_Sans-Black.eot?#iefix") format("embedded-opentype"),
+                             url("https://s.yimg.com/cv/api/bcg/banners/fonts/Yahoo_Sans-Black.woff2") format("woff2"),
+                             url("https://s.yimg.com/cv/api/bcg/banners/fonts/Yahoo_Sans-Black.woff") format("woff");
+                    font-weight: 900;
+                    font-style: normal;
+                    }
+        </style>
+</head>
+
+<body>
+
+    <div id="loading">loading</div>
+    <nav id="menu" style="background:#333;color:#fff;">
+        <h2 class="text-left ft-ysanextrabold pl-2 rank-heaading mb-5">Rankings</h2>
+        <div class="rank-heading-icon my-4">
+            <img class="" src="/images/rank.png" />
+            <span class="rank-heading-title">Ranks</span>
+        </div>
+        <ul class="rank-list">
+            <li class="p-4 active"><a class="league-ranks row" data-page-id="leaguePage" data-title="Leagues Ranking"
+                    href="#league-rankings">
+                    <span class="col-12 rank-icon">
+                        <i class="pb-2 fal fa-3x fa-football-ball text-center"></i>
+                    </span>
+                    <span class="col-12 rank-title">
+                        League Rankings
+                    </span>
+                    <span class="col-12 rank-title-m m-0">
+                        League
+                    </span>
+                </a></li>
+            <li class="p-4"><a class="team-ranks row" data-page-id="teamPage" data-title="Teams Ranking" href="#team-rankings">
+                    <span class="col-12 rank-icon">
+                        <i class="pb-2 fal fa-3x fa-award"></i>
+                    </span>
+                    <span class="col-12 rank-title">
+                        Team Rankings
+                    </span>
+                    <span class="col-12 rank-title-m" style="margin:0 0 0 6px;">
+                        Team
+                    </span>
+                </a></li>
+            <li class="p-4"><a class="weekly-ranks row" data-page-id="weeklyPage" data-title="Weekly High Score" href="#weekly-high-scores">
+                    <span class="col-12 rank-icon">
+                        <i class="pb-2 fal fa-3x fa-trophy-alt"></i>
+                    </span>
+                    <span class="col-12 rank-title">
+                        Weekly High Score!
+                    </span>
+                    <span class="col-12 rank-title-m" style="margin:0 0 0 3px;">
+                        Weekly
+                    </span>
+                </a></li>
+        </ul>
+    </nav>
+
+    <main id="panel">
+        <header class="row">
+
+            <div class="col-sm-1 text-left">
+                <div class="" style="vertical-align:top;background:#333;width:40px;position:relative;">
+                    <button class="toggle-button btn btn-dark align-top" style="position:fixed;top:0;">
+                        <i class="far fa-angle-left"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mainContent" class="col-lg-9 col-md-8 col-sm-8">
+                <h1 class="ft-ysanblack text-center my-4">Fantasy Football Leaderboard</h1>
+
+                <h2 id="rank-heading" class="ft-ysanbold mb-3">Leagues Ranking</h2>
+
+
+
+                <%- body -%>
+
+
+
+            </div>
+
+        </header>
+    </main>
+
+
+    <!-- league vew more mode -->
+    <div class="modal" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document" style="width:90%;max-width:1120px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- league vew more mode -->
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/slideout/dist/slideout.js"></script>
+    <script type="text/javascript">
+        $(window).on('load', function () {
+            $('#loading').hide();
+        });
+    </script>
+    <script src="/js/custom.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<div class="row">
+        <div class="col-md-12 py-3">
+          <img class="team-icon" src="<%= data.profileImg %>" />
+        </div>
+        <div class="col-md-12 text-center">
+             <h1 class="team-heading"><%= data.teamName %></h1>
+             <div class="row">
+                <div class="col-12 px-3 pt-1 pb-2">
+                  <div class="team-info"><%= data.leagueName %></div>
+                </div>
+                <div class="col-12 px-3 pb-2">
+                  <div class="team-info"><%= data.manager %></div>
+                </div>
+             </div>
+                <div class="mt-2 mb-3">
+                    <div class="team-ts">Total Score</div>
+                    <h2 class="team-heading2">
+                        <%= data.standing['points_for'] %>
+                      </h2>
+                </div>
+             <div class="row">
+               <div class="col-5 offset-1">
+                 <div>
+                   W - L - T
+                 </div>
+                 <div class="ft-ysanbold">
+                   <%= data.standing.outcome_totals.wins %> - <%= data.standing.outcome_totals.losses %> - <%= data.standing.outcome_totals.ties %>
+                 </div>
+               </div>
+               <div class="col-5">
+                 <div>W/L Ratio</div>
+                 <div class="ft-ysanbold">
+                   <%= (data.standing.outcome_totals.percentage * 100).toFixed(2) %>%
+                 </div>
+               </div>
+             </div>
+        </div>
+      </div>

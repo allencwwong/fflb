@@ -1,0 +1,49 @@
+<div class="card-flipable">
+    <div class="row card-front">
+
+            <div class="col-sm-12 position-relative" style="height:150px;overflow:hidden;">
+                   <img class="league-logo position-absolute" src="<%= data.leagueLogo %>" />
+            </div>
+            <div class="col-sm-12 px-4 py2">
+                <h1 class="league-heading"><%= data.leagueName %></h1>
+                <p class="league-total-score"><%= (data.leagueTotalScore).toFixed(2) %> pts</p>
+                <p class="league-commish">Commisioner: <%= data.commish %></p>
+            </div>
+
+
+        </div>
+
+        <div class="row card-back">
+
+            <div class="league-teams col-md-12">
+                    <h2 class="card-back-heading text-center">Top 4 Teams</h2>
+                    <% var leagueTeams = []; %>
+                    <% teams.forEach(function(team){ %>
+                        <% var leagueTeam = {}; %>
+                        <% if(team.leagueName === data.leagueName && team.standing.rank < 5){ %>
+                            <% leagueTeam.name = team.teamName %>
+                            <% leagueTeam.manager = team.manager %>
+                            <% leagueTeam.standing = team.standing %>
+                            <% leagueTeams.push(leagueTeam) %>
+                        <% } %>
+                    <% }) %>
+                    <div class="container">
+                        <% leagueTeams.sort(function(a,b){ %>
+                        <% return a.standing.rank - b.standing.rank  %>
+                        <% }) %>
+                        <% leagueTeams.forEach(function(team,idx){ %>
+                          <% if(idx < 4){ %>
+                            <div class="row text-center card-back-team-container">
+                                <span class="col-6 card-back-team"><%= team.name %></span>
+                                <span class="col-6 card-back-team"><%= team.manager %></span>
+                                <span class="col-6 ft-ysanbold ft-red card-back-team"><%= team.standing.points_for %></span>
+                                <span class="col-6 ft-ysanbold ft-green">
+                                        <%= team.standing.outcome_totals.wins %> - <%= team.standing.outcome_totals.losses %> - <%= team.standing.outcome_totals.ties %>
+                                </span>
+                            </div>
+                          <% } %>
+                        <% }) %>
+                    </div>
+            </div>
+        </div>
+</div>

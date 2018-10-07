@@ -1,0 +1,68 @@
+<div class="row">
+
+    <% data.forEach(function(data,idx) { %>
+
+    <div class="col-12 col-md-6 col-lg-3 mb-3">
+        <% if(collection == 'team'){ %>
+        <div class="card card-long card-grey my-3" data-rank="<%= idx %>" data-league="" data-guid="">
+            <div class="card-body">
+                <div class="position-absolute badge badge-dark m-2" style="z-index:99;">T Rank:
+                    <%= data.standing.rank %>
+                </div>
+                <div class="position-absolute badge badge-dark m-2 l-rank" style="z-index:99;">L Rank:
+                    <%= idx+1 %>
+                </div>
+                <% include ./listDetailsTeam %>
+            </div>
+            <!-- card footer -->
+            <div class="card-footer card-league-footer" data-toggle="modal" data-target="#myModal">view more</div>
+
+
+            <% } else if( collection == 'league'){ %>
+                <%- JSON.stringify(data) %>
+            <div class="card card-normal card-grey my-3" data-rank="<%= idx %>" data-league="<%= data.leagueId %>">
+                <div class="card-body">
+                    <div class="position-absolute badge badge-dark m-2 btn-flip" style="z-index:99;right:0;">Flip</div>
+                    <% if(idx === 0){ %>
+                    <div class="position-absolute badge badge-gold m-2" style="z-index:99;">L Rank:
+                        <%= idx+1 %>
+                    </div>
+                    <% } else if(idx === 1){ %>
+                    <div class="position-absolute badge badge-silver m-2" style="z-index:99;">L Rank:
+                        <%= idx+1 %>
+                    </div>
+                    <% } else if(idx === 2){ %>
+                    <div class="position-absolute badge badge-bronze m-2" style="z-index:99;">L Rank:
+                        <%= idx+1 %>
+                    </div>
+                    <% } else{%>
+                    <div class="position-absolute badge badge-purple m-2" style="z-index:99;">L Rank:
+                        <%= idx+1 %>
+                    </div>
+                    <% } %>
+
+                    <% include ./listDetailsLeague %>
+
+                </div>
+                <!-- card footer -->
+                <div class="card-footer card-league-footer" data-toggle="modal" data-target="#myModal">view more</div>
+
+
+                <% } else{ %>
+                <div class="card card-long card-gold my-3">
+                    <div class="card-body">
+                        <% include ./listDetailsWhss %>
+                    </div>
+                    <!-- card footer -->
+
+                    <div class="card-footer card-league-footer" data-toggle="modal" data-target="#myModal">view more</div>
+
+                    <% } %>
+
+
+                </div>
+            </div>
+            <% }) %>
+        </div>
+
+        <!-- footer card Model -->
