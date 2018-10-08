@@ -5,81 +5,81 @@ const Whs = require('../models/whs');
 
 exports.test = function (req, res) {
 
-    var WEEK = process.env.GAME_WEEK || 4;
+    var WEEK = process.env.GAME_WEEK || 1;
 
     var highScore = 0;
     var weeklyHighScore = {};
     var weeklyHighScoreList = [];
 
-    Team.find({}, function(err,teams) {
+    Team.find({}, function (err, teams) {
         return teams;
-    }).then(function(teams){
+    }).then(function (teams) {
 
-                    // save whs
-                    Whs.find({week:WEEK},function(err, whs){
+        // save whs
+        Whs.find({
+            week: WEEK
+        }, function (err, whs) {
 
 
-                        for(var currWeek = 1; currWeek <= WEEK; currWeek++) {
-                            console.log('loop', WEEK)
-                            teams.forEach(function(team) {
-                              //  console.log(team.guid)
-                                if (parseFloat(team.weeklyScore[currWeek]) > highScore) {
-                                    highScore = parseFloat(team.weeklyScore[currWeek]);
-                                    weeklyHighScore.guid = team.guid;
-                                    weeklyHighScore.league = team.leagueName;
-                                    weeklyHighScore.score = team.weeklyScore[currWeek];
-                                    weeklyHighScore.week = currWeek;
-                                }
-                                // console.log(highScore," wk:",currWeek);
-                            }) // end of each team
+            console.log('loop', WEEK)
+            teams.forEach(function (team) {
 
-                            weeklyHighScoreList.push(weeklyHighScore);
-                            weeklyHighScore = {};
-                            highScore = 0;
-                        } // loop x week
+                if (parseFloat(team.weeklyScore[WEEK]) > highScore) {
+                    highScore = parseFloat(team.weeklyScore[WEEK]);
+                    // weeklyHighScore.guid = team.guid;
+                    // weeklyHighScore.league = team.leagueName;
+                    weeklyHighScore.team = team,
+                        weeklyHighScore.score = team.weeklyScore[WEEK];
+                    weeklyHighScore.week = WEEK;
+                }
+                // console.log(highScore, " wk:", WEEK);
+            }) // end of each team
 
-                        // var lastScore = (weeklyHighScoreList.length-1;
-                        console.log(weeklyHighScoreList);
-                        console.log('whs save')
+            //weeklyHighScoreList.push(weeklyHighScore);
+            // weeklyHighScore = {};
+            // highScore = 0;
 
-                        if(whs.length === 0){
-                            console.log(whs);
-                                var whs = new Whs({
-                                    guid:weeklyHighScoreList[WEEK-1].guid,
-                                    league:weeklyHighScoreList[WEEK-1].league,
-                                    score:weeklyHighScoreList[WEEK-1].score,
-                                    week:weeklyHighScoreList[WEEK-1].week
+            if (whs.length === 0) {
+                var whs = new Whs({
+                    team: weeklyHighScore.team,
+                    score: weeklyHighScore.score,
+                    week: weeklyHighScore.week
 
-                                })
+                })
 
-                                whs.save(function (err) {
-                                    console.log(whs, ' == updated whs wk:', WEEK);
-                                });
-                        }
+                whs.save(function (err) {
+                    console.log(whs, ' == updated whs wk:', WEEK);
+                });
+            }
 
-                    })
-                    // next and reset
+        })
+        // next and reset
 
 
     })
 
-    User.find({},function(err,users){
-        users.forEach(function(user){
+    User.find({}, function (err, users) {
+        users.forEach(function (user) {
             console.log(user.commish)
-            if(!user.commish){
-                user.standings.forEach(function(standing){
-                    if(standing.managers[0].is_commissioner){
+            if (!user.commish) {
+                user.standings.forEach(function (standing) {
+                    if (standing.managers[0].is_commissioner) {
                         user.commish = standing.managers[0].nickname;
-                        user.save(function(err){
-                            console.log(standing.managers[0].nickname);
+                        user.save(function (err) {
+                            // console.log(standing.managers[0].nickname);
                         });
                     }
                 })
             }
-            user.standings.forEach(function(standing){
+            user.standings.forEach(function (standing) {
                 var guid = standing.managers[0].guid;
-                Team.updateOne({guid:guid,leagueId:user.leagueId},{standing:standing.standings},function(err){
-                    console.log('update standing');
+                Team.updateOne({
+                    guid: guid,
+                    leagueId: user.leagueId
+                }, {
+                    standing: standing.standings
+                }, function (err) {
+                    // console.log('update standing');
                 })
             })
         })

@@ -84,7 +84,7 @@ router.get("/", function (req, res) {
 //   // sort team total score high to low
 //   User.find({}, function (err, users) {
 
-//     // get whs recrod
+//     // get whs record
 //     Whs.find({}, function (err, whss) {
 //       var whsRecords = [];
 
@@ -110,7 +110,9 @@ router.get("/", function (req, res) {
 
 router.get('/api/v1/whs/', function (req, res) {
   // sort team total score high to low
-
+  Whs.find({}, function (err, whss) {
+    res.send(whss);
+  })
 
 
 })
