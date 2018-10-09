@@ -5,7 +5,7 @@ const Whs = require('../models/whs');
 
 exports.test = function (req, res) {
 
-    var WEEK = process.env.GAME_WEEK || 1;
+    var WEEK = process.env.GAME_WEEK || 5;
 
     var highScore = 0;
     var weeklyHighScore = {};

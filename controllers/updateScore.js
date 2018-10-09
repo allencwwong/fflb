@@ -15,7 +15,7 @@ var yf = new YahooFantasy(
     process.env.YAHOO_CONSUMER_SECRET
 );
 
-var WEEK = process.env.GAME_WEEK || 3;
+var WEEK = process.env.GAME_WEEK || 5;
 
 // helper
 

@@ -2,7 +2,7 @@ const Score = require('../models/score');
 const Team = require('../models/team');
 const Whs = require('../models/whs');
 
-var WEEK = process.env.GAME_WEEK || 2;
+var WEEK = process.env.GAME_WEEK || 5;
 
 exports.test = function (req, res) {
 

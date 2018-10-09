@@ -122,7 +122,7 @@
           //   }
           // })
 
-          var cardBodyHtml = '<div class="row"></div>';
+          var cardBodyHtml = '<div class="row">';
 
           whss.forEach(function (whs) {
 
