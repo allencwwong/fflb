@@ -450,3 +450,9 @@ h2.team-heading2 {
 .slideout-open .slideout-menu {
   display: block;
 }
+
+@media screen and (max-width:480px) {
+  #mainContent {
+    margin: 0;
+  }
+}

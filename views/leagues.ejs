@@ -3,63 +3,70 @@
     loading...
 </div>
 <div id="comingSoonPage">
-        <img src="/images/forward-pass-quarterback.gif"><br>
-        working on it...
-    </div>
-<div class="row main-page">
+    <img src="/images/forward-pass-quarterback.gif"><br>
+    working on it...
+</div>
+<div class="container">
+    <div class="row main-page">
 
         <% leagues.forEach(function(league,idx) { %>
 
-            <div class="col-12 col-md-6 col-lg-3 mb-3">
+        <div class="col-12 col-md-6 col-lg-3 mb-1 mb-lg-3">
 
 
-                    <div class="card card-normal card-grey my-3 flip-card" data-rank="<%= idx %>" data-league="<%= league.leagueId %>">
-                        <div class="card-body">
-                            <div class="position-absolute badge badge-dark m-2 btn-flip" style="z-index:99;right:0;">Flip</div>
-                            <% if(idx === 0){ %>
-                            <div class="position-absolute badge badge-gold m-2" style="z-index:99;">L Rank:
-                                <%= idx+1 %>
+            <div class="card card-normal card-grey my-3 flip-card" data-rank="<%= idx %>" data-league="<%= league.leagueId %>">
+                <div class="card-body">
+                    <div class="position-absolute badge badge-dark m-2 btn-flip" style="z-index:99;right:0;">Flip</div>
+                    <% if(idx === 0){ %>
+                    <div class="position-absolute badge badge-gold m-2" style="z-index:99;">L Rank:
+                        <%= idx+1 %>
+                    </div>
+                    <% } else if(idx === 1){ %>
+                    <div class="position-absolute badge badge-silver m-2" style="z-index:99;">L Rank:
+                        <%= idx+1 %>
+                    </div>
+                    <% } else if(idx === 2){ %>
+                    <div class="position-absolute badge badge-bronze m-2" style="z-index:99;">L Rank:
+                        <%= idx+1 %>
+                    </div>
+                    <% } else{%>
+                    <div class="position-absolute badge badge-purple m-2" style="z-index:99;">L Rank:
+                        <%= idx+1 %>
+                    </div>
+                    <% } %>
+
+                    <!-- body -->
+                    <div class="card-flipable">
+                        <div class="row card-front">
+                            <div class="col-sm-12 position-relative" style="height:150px;overflow:hidden;">
+                                <img class="league-logo position-absolute" src="<%= league.leagueLogo %>" />
                             </div>
-                            <% } else if(idx === 1){ %>
-                            <div class="position-absolute badge badge-silver m-2" style="z-index:99;">L Rank:
-                                <%= idx+1 %>
+                            <div class="col-sm-12 px-4 py2">
+                                <h1 class="league-heading">
+                                    <%= league.leagueName %>
+                                </h1>
+                                <p class="league-total-score">
+                                    <%= (league.leagueTotalScore).toFixed(2) %> pts</p>
+                                <p class="league-commish">Commisioner:
+                                    <%= league.commish %>
+                                </p>
                             </div>
-                            <% } else if(idx === 2){ %>
-                            <div class="position-absolute badge badge-bronze m-2" style="z-index:99;">L Rank:
-                                <%= idx+1 %>
-                            </div>
-                            <% } else{%>
-                            <div class="position-absolute badge badge-purple m-2" style="z-index:99;">L Rank:
-                                <%= idx+1 %>
-                            </div>
-                            <% } %>
-
-                            <!-- body -->
-                            <div class="card-flipable">
-                                    <div class="row card-front">
-                                            <div class="col-sm-12 position-relative" style="height:150px;overflow:hidden;">
-                                                   <img class="league-logo position-absolute" src="<%= league.leagueLogo %>" />
-                                            </div>
-                                            <div class="col-sm-12 px-4 py2">
-                                                <h1 class="league-heading"><%= league.leagueName %></h1>
-                                                <p class="league-total-score"><%= (league.leagueTotalScore).toFixed(2) %> pts</p>
-                                                <p class="league-commish">Commisioner: <%= league.commish %></p>
-                                            </div>
-                                    </div>
-
-                                    <div class="row card-back"></div>
-
-                            </div>
-
-                            <!-- end of body -->
                         </div>
-                        <!-- card footer -->
-                        <div class="card-footer card-league-footer" data-toggle="modal" data-target="#myModal">view more</div>
 
-
+                        <div class="row card-back"></div>
 
                     </div>
+
+                    <!-- end of body -->
+                </div>
+                <!-- card footer -->
+                <div class="card-footer card-league-footer" data-toggle="modal" data-target="#myModal">view more</div>
+
+
+
             </div>
+        </div>
         <% }) %>
+    </div>
 </div>
-            <!-- footer card Model -->
+<!-- footer card Model -->
