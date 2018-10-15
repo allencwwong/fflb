@@ -25,11 +25,22 @@
       console.log($(this).data('title'))
       $(pageId).show();
 
+      $('.filterBar').removeClass('active');
+
+      var myPageId = $(this).data('page-id');
+
+      if (myPageId === 'leaguePage') {
+        $('#leaguesFilter').addClass('active')
+      } else if (myPageId === 'teamPage') {
+        $('#teamsFilter').addClass('active')
+      }
+
     })
 
     $('.rank-list .league-ranks').on('click', function () {
       $("#comingSoonPage").hide();
       $('.main-page').html(leaguePage);
+      filterLeague('leagueSearch');
     })
 
 
@@ -41,6 +52,7 @@
       $("#comingSoonPage").hide();
       if (teamsPage != '') {
         $('.main-page').html(teamsPage);
+        filterLeague('teamSearch');
       } else {
         loadTeamPage();
       }
@@ -75,13 +87,16 @@
 
             cardBodyHtml += `<div class="col-12 col-md-6 col-lg-3 mb-3">
             <div class="card card-long card-grey my-3" data-rank="${idx}" data-league="${team.leagueId}">
-            <div class="card-body"><div class="position-absolute badge badge-dark m-2" style="z-index:99;">T Rank:${team.standing.rank}</div><div class="position-absolute badge badge-dark m-2 l-rank" style="z-index:99;">L Rank:${idx+1}</div><div class="row"><div class="col-md-12 py-3"><img class=team-icon src="${team.profileImg}"></div><div class="col-md-12 text-center"><h1 class=team-heading>${team.teamName}</h1><div class=row><div class="col-12 pb-2 px-3 pt-1"><div class=team-info>${team.leagueName}</div></div><div class="col-12 pb-2 px-3"><div class=team-info>${team.manager} </div></div></div><div class="mb-3 mt-2"><div class=team-ts>Total Score</div><h2 class=team-heading2>${team.standing['points_for']}</h2></div><div class=row><div class="col-5 offset-1"><div>W - L - T</div><div class=ft-ysanbold>${team.standing.outcome_totals.wins}-${team.standing.outcome_totals.losses}-${team.standing.outcome_totals.ties}</div></div><div class=col-5><div>W/L Ratio</div><div class=ft-ysanbold>${(team.standing.outcome_totals.percentage * 100).toFixed(2)}%</div></div></div></div></div></div></div></div>`;
+            <div class="card-body"><div class="position-absolute badge badge-dark m-2" style="z-index:99;">T Rank:${team.standing.rank}</div><div class="position-absolute badge badge-dark m-2 l-rank" style="z-index:99;">L Rank:${idx+1}</div><div class="row"><div class="col-md-12 py-3"><img class=team-icon src="${team.profileImg}"></div><div class="col-md-12 text-center"><h1 class=team-heading>${team.teamName}</h1><div class=row><div class="col-12 pb-2 px-3 pt-1"><div class=team-info>${team.leagueName}</div></div><div class="col-12 pb-2 px-3"><div class="team-info team-manager">${team.manager} </div></div></div><div class="mb-3 mt-2"><div class=team-ts>Total Score</div><h2 class=team-heading2>${team.standing['points_for']}</h2></div><div class=row><div class="col-5 offset-1"><div>W - L - T</div><div class=ft-ysanbold>${team.standing.outcome_totals.wins}-${team.standing.outcome_totals.losses}-${team.standing.outcome_totals.ties}</div></div><div class=col-5><div>W/L Ratio</div><div class=ft-ysanbold>${(team.standing.outcome_totals.percentage * 100).toFixed(2)}%</div></div></div></div></div></div></div></div>`;
           })
 
 
           $('.main-page').html('').append(cardBodyHtml);
           teamsPage = $('.main-page').html();
 
+        },
+        complete: function (data) {
+          filterLeague('teamSearchOptions');
         }
       })
     }
@@ -263,6 +278,55 @@
 
   })
 
+  // =================== //
+  // Filter - leagues
+  // =================== //
+
+  function filterLeague(id) {
+    var selectedOption, searchBar;
+    var cards = $('.main-page .card');
+    var cardKeys = Object.keys(cards);
+
+    // console.log(cards);
+
+    if (id === 'teamSearchOptions') {
+      selectedOption = $('#teamSearchOptions').val();
+      searchBar = $('#teamSearch');
+      console.log(selectedOption, ' sb:', searchBar);
+    } else {
+      selectedOption = $('#leagueSearchOptions').val();
+      searchBar = $('#leagueSearch');
+
+      console.log(selectedOption, ' sb:', searchBar);
+    }
+
+    searchBar.on('keyup', function () {
+      var input = $(this).val().toLowerCase();
+
+      function filter(selectedOption) {
+        var searchBy = '.' + selectedOption;
+        cardKeys.forEach(function (cardKey) {
+          var leagueName = $(cards[cardKey]).find(searchBy);
+          if ($(leagueName).text().toLowerCase().indexOf(input) > -1) {
+            $(cards[cardKey]).parent().show();
+          } else {
+            $(cards[cardKey]).parent().hide();
+          }
+        })
+      }
+
+      filter(selectedOption);
+
+    })
+  }
+
+  filterLeague('leagueSearch');
+
+  $('.filterBar select').on('change', function () {
+    var id = $(this).attr('id');
+    console.log('id', id);
+    filterLeague(id);
+  })
 
 
   // =================== //

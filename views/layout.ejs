@@ -68,6 +68,7 @@
                     <span class="col-12 rank-title">
                         League Rankings
                     </span>
+
                     <span class="col-12 rank-title-m m-0">
                         League
                     </span>
@@ -112,6 +113,27 @@
                 <h1 class="ft-ysanblack text-center my-4">Fantasy Football Leaderboard</h1>
 
                 <h2 id="rank-heading" class="ft-ysanbold mb-3">Leagues Ranking</h2>
+
+                <div id="leaguesFilter" class="filterBar active input-group">
+                    <div class="input-group-prepend">
+                        <input class="form-control" type="text" id="leagueSearch" placeholder="search league by" />
+                        <select id="leagueSearchOptions">
+                            <option value="league-heading" selected>name</option>
+                            <option value="league-commish">commish</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div id="teamsFilter" class="filterBar input-group">
+                    <div class="input-group-prepend">
+                        <input class="form-control" type="text" id="teamSearch" placeholder="search team by" />
+                        <select id="teamSearchOptions">
+                            <option value="team-heading" selected>team name</option>
+                            <option value="team-manager">manager</option>
+                        </select>
+                    </div>
+                </div>
 
 
 
