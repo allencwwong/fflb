@@ -152,7 +152,7 @@ router.get('/login', function (req, res) {
       user: req.session.user
     })
   }
-  res.redirect('/auth')
+  res.redirect('/')
 });
 
 // GET logout
