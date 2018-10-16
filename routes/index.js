@@ -168,7 +168,7 @@ router.get('/createteam', createTeam_controller.test);
 // add to user db with rankings
 router.get('/updaterankings', updateRankings_controller.test);
 // add to team db with weekly score
-router.get('/test4', updateWeekly_controller.test);
+router.get('/weekly', updateWeekly_controller.test);
 // get weekly high score add to whs db
 router.get('/qdb', qdb_controller.test);
 

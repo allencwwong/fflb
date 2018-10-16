@@ -1,13 +1,38 @@
 const Score = require('../models/score');
 const Team = require('../models/team');
 const Whs = require('../models/whs');
+const User = require('../models/user');
 
-var WEEK = process.env.GAME_WEEK || 5;
+// var WEEK = process.env.GAME_WEEK || 1;
 
 exports.test = function (req, res) {
 
   var weeklyScore = {};
   var counter = 0;
+
+
+  // User.find({}, function (err, users) {
+  //   return users;
+  // }).then(function (users) {
+  //   users.forEach(function (user) {
+  //     var leagueId = user.leagueId;
+  //     user.standings.forEach(function (standing) {
+  //       var guid = standing.managers[0].guid;
+  //       console.log('guid: ', guid, ' id', leagueId);
+  //       Team.updateOne({
+  //         guid: guid,
+  //         leagueId: leagueId
+  //       }, {
+  //         standing: standing.standings
+  //       }, function (err) {
+  //         if (err) console.log(err);
+  //         console.log('update standing')
+  //       })
+
+  //     })
+  //   })
+  // })
+
 
   Score.find({}, function (err, scores) {
     return scores;
@@ -61,18 +86,17 @@ exports.test = function (req, res) {
       // console.log(counter);
 
     })
-    console.log(weeklyScore);
+    // console.log(weeklyScore);
 
 
     var whsLeagueIds = Object.keys(weeklyScore);
 
-    console.log(whsLeagueIds[0]);
+    // console.log(whsLeagueIds[0]);
 
     whsLeagueIds.forEach(function (id) {
       var leagueGuids = Object.keys(weeklyScore[id]);
       // console.log(leagueGuids);
       leagueGuids.forEach(function (guid) {
-        console.log('guid: ', guid, ' id', id);
         Team.updateOne({
           guid: guid,
           leagueId: id

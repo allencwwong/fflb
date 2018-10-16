@@ -3,7 +3,7 @@ const Team = require('../models/team');
 
 
 exports.test = function (req, res) {
-    var leagueList = [1137478,
+    var leagueList = [
         1414100,
         123427,
         141935,
@@ -68,12 +68,16 @@ exports.test = function (req, res) {
                     league.scoreboard.matchups.forEach(function (match) {
                         match.teams.forEach(function (teamData) {
                             var guid = teamData.managers[0].guid;
+                            if (league.league_id !== '1137478') {
 
-                            // console.log(guid);
-                            //promise
-                            Team.find({guid:guid,leagueId:league.league_id}, function (err, team) {
+                                // console.log(guid);
+                                //promise
+                                Team.find({
+                                    guid: guid,
+                                    leagueId: league.league_id
+                                }, function (err, team) {
 
-                                if(team.length === 0){
+                                    if (team.length === 0) {
                                         var team = new Team({
                                             guid: guid,
                                             teamKey: teamData.team_key,
@@ -84,66 +88,21 @@ exports.test = function (req, res) {
                                             profileImg: teamData.team_logos[0].url,
                                             weeklyScore: {}
                                         })
-                                        team.save(function(err){
+                                        team.save(function (err) {
                                             // console.log('add team',counter++)
                                         })
-                                }
-                                // if (week == 1) {
-                                //     // console.log(leagueName);
-
-                                //     //team.weeklyScore[week] = teamData.points.total;
-
-                                //     if (!addedTeam.includes(guid)) {
-
-                                //         var team = new Team({
-                                //             guid: guid,
-                                //             teamKey: teamData.team_key,
-                                //             leagueId: league.league_id,
-                                //             leagueName: league.name,
-                                //             teamName: teamData.name,
-                                //             manager: teamData.managers[0].nickname,
-                                //             profileImg: teamData.team_logos[0].url,
-                                //             weeklyScore: {}
-                                //         })
-
-                                //         addedTeam.push(guid);
-                                //             team.save(function (err) {
-                                //                 // console.log("add team for week1 only");
-
-                                //             });
-                                //         //save team info to db
-
-
-                                //     }else{
-                                //         var team = new Team({
-                                //             guid: guid,
-                                //             teamKey: teamData.team_key,
-                                //             leagueId: league.league_id,
-                                //             leagueName: league.name,
-                                //             teamName: teamData.name,
-                                //             manager: teamData.managers[0].nickname,
-                                //             profileImg: teamData.team_logos[0].url,
-                                //             weeklyScore: {}
-                                //         })
-                                //         // team.guid = guid;
-                                //         // team.leagueId = league.league_id;
-                                //         // team.teamKey = teamData.team_key;
-                                //         team.save(function(err){
-                                //             console.log(team);
-                                //         });
-                                //     }
-
-                                // }
-                            })
+                                    }
+                                })
+                            }
                         })
                     }) // end of matchups
 
                 })
             }
         })
-    }).then(function(){
+    }).then(function () {
 
-        Team.find({},function(err,teams){
+        Team.find({}, function (err, teams) {
             console.log(teams[0]);
         })
 
@@ -152,5 +111,3 @@ exports.test = function (req, res) {
     res.send('updated 2')
 
 };
-
-// MH2QL4PLAXCA7UDHUCEQFVXVEY

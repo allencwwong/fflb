@@ -5,7 +5,7 @@ const Whs = require('../models/whs');
 
 exports.test = function (req, res) {
 
-    var WEEK = process.env.GAME_WEEK || 5;
+    var WEEK = process.env.GAME_WEEK || 1;
 
     var highScore = 0;
     var weeklyHighScore = {};
@@ -23,7 +23,7 @@ exports.test = function (req, res) {
 
             console.log('loop', WEEK)
             teams.forEach(function (team) {
-
+                console.log(team.guid, ' score', team.weeklyScore[WEEK])
                 if (parseFloat(team.weeklyScore[WEEK]) > highScore) {
                     highScore = parseFloat(team.weeklyScore[WEEK]);
                     // weeklyHighScore.guid = team.guid;
@@ -79,7 +79,7 @@ exports.test = function (req, res) {
                 }, {
                     standing: standing.standings
                 }, function (err) {
-                    // console.log('update standing');
+                    console.log('update standing');
                 })
             })
         })
