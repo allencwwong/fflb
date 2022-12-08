@@ -25,7 +25,7 @@
     "passport-yahoo-oauth": "git+https://github.com/whatadewitt/passport-yahoo-oauth.git",
     "popper.js": "^1.14.4",
     "q": "^1.5.1",
-    "qs": "^6.5.2",
+    "qs": "^6.5.3",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5",
     "slideout": "^1.0.1",
